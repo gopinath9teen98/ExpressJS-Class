@@ -1,69 +1,77 @@
-// const { Router } = require('express')
-// const express=require('express');
-// const { render } = require('express/lib/response');
-// const router= express.Router;
+const express=require('express');
+const router= express.Router();
+var fs = require('fs');``
 
-// let products=[
-//     {
-//         _id:1,
-//         pName:"Bag",
-//         pDesc:"wearable",
-//         price:1200
-//     }
-// ]
 
-// router.get('/products',(req,res)=>{
-//     res.render('./products.handlebars',{products})
-// })
+let products=[
+    {
+        _id:1,
+        pName:"Bag",
+        pDesc:"wearable",
+        price:1200
+    }
+]
 
-// render.post('/add-product',(req,res)=>{
-//     console.log(req.body);
-//     let {_id,pName,pDesc,price}=req.body;
-//     _id=parseInt(_id);
-//     price=parseInt(price);
-//     products.push(
-//         {
-//             _id,
-//             pName,
-//             pDesc,
-//             price
-//         }
-//     )
-//     res.redirect('/products/products');
-// })
+router.get('/products',(req,res)=>{
+    products=JSON.parse(fs.readFileSync('demo/text.txt'))
+    res.render('./products.handlebars',{products})
+})
 
-// render.get('edit-product/:_id',(req,res)=>{
-//     console.log(req.params._id);
-//     _id=parseInt(req.params._id);
-//     const index=products.findIndex((product)=>{
-//         return parseInt(product._id)===parseInt(_id)
-//     })
-//     const selectedProduct=products[index]
-//     res.render('./edit-product.handlebars',{selectedProduct})
-// })
+router.get('/add-products',(req,res)=>{
+    res.render('./add-products.handlebars',{products})
+})
 
-// render.post('edit-product',(req,res)=>{
-//     console.log(req.body);
-//     let{_id,pDesc,pName,price}=req.body
-//     _id=parseInt(_id);
-//     price=parseInt(price);
+router.post('/add-product',(req,res)=>{
+    console.log(req.body);
+   
+   
+    let {_id,pName,pDesc,price}=req.body;
+    _id=parseInt(_id);
+    price=parseInt(price);
+    products.push(
+        {
+            _id,
+            pName,
+            pDesc,
+            price
+        }
+    )
+    fs.writeFileSync('demo/text.txt',JSON.stringify(products))
+    res.redirect('/products/products');
+})
 
-//     const index=products.findIndex((product)=>{
-//         return parseInt(product._id)===parseInt(_id)
-//     })
-//     products.splice(index,1,{_id,pDesc,pName,price})
-//     res.redirect('/products/products')
-// })
+router.get('/edit-product/:_id',(req,res)=>{
+    console.log(req.params._id);
+   _id=parseInt(req.params._id);
+    const index=products.findIndex((product)=>{
+        return parseInt(product._id)===parseInt(_id)
+    })
+    const selectedProduct=products[index]
+    res.render('./edit-product.handlebars',{selectedProduct})
+})
 
-// //  delete the product
-// render.get('delete-product/:_id',(req,res)=>{
-//     console.log(req.params._id);
-//     _id=parseInt(req.params._id);
-//     const index=products.findIndex((product)=>{
-//         return parseInt(product._id)===parseInt(_id)
-//     })
-//     products.splice(index,1)
-//     res.redirect('/products/products')
-// })
+router.post('/edit-product',(req,res)=>{
+    console.log(req.body);
+    let{_id,pDesc,pName,price}=req.body
+    _id=parseInt(_id);
+    price=parseInt(price);
 
-// module.export={router}
+    const index=products.findIndex((product)=>{
+        return parseInt(product._id)===parseInt(_id)
+    })
+    products.splice(index,1,{_id,pDesc,pName,price})
+    res.redirect('/products/products')
+})
+
+//  delete the product
+router.get('delete-product/:_id',(req,res)=>{
+    console.log(req.params._id);
+    _id=parseInt(req.params._id);
+    const index=products.findIndex((product)=>{
+        return parseInt(product._id)===parseInt(_id)
+    })
+    products.splice(index,1)
+    res.redirect('/products/products')
+})
+
+module.exports=router;
