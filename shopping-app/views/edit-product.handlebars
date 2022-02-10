@@ -1,0 +1,23 @@
+<h1 style="margin-left:550px ;margin-top: 20px; margin-bottom: 20px;">EDIT PRODUCTS</h1>
+
+<div class="container">
+    <form action="/products/edit-product" method="POST">
+  <div class="form-group">
+    <label for="exampleInputEmail1">ID:</label>
+    <input type="number" class="form-control" id="_id" name="_id" aria-describedby="emailHelp" value="{{selectedProduct._id}}">
+  </div>
+   <div class="form-group">
+    <label for="exampleInputEmail1">Product Name</label>
+    <input type="text" class="form-control" id="pName" name="pName" aria-describedby="emailHelp"   value="{{selectedProduct.pName}}">
+  </div>
+   <div class="form-group">
+    <label for="exampleInputEmail1">Product Description:</label>
+    <input type="text" class="form-control" id="pDesc" name="pDesc" aria-describedby="emailHelp"   value="{{selectedProduct.pDesc}}">
+  </div>
+   <div class="form-group">
+    <label for="exampleInputEmail1">Product Price:</label>
+    <input type="number" class="form-control" id="price" name="price" aria-describedby="emailHelp"   value="{{selectedProduct.price}}">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
