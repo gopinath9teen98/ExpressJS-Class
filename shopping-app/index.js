@@ -24,7 +24,7 @@ app.use(express.urlencoded({extended:true}))
 //Router level Middleware
 app.use('/products',productsRoute) 
 
-app.get('/',(req,res)=>{
+app.get('/home',(req,res)=>{
     res.render('./landingpage.handlebars')
 })
 // app.get('/products/products',(req,res)=>{

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+    <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">Product Description</th>
+      <th scope="col">Product Price</th>
+      <th scope="col">Edit Product</th>
+      <th scope="col">Delete Product </th>
+    </tr>
+  </thead>
+  <tbody>
+      {{#each products}}
+    <tr>
+      <th scope="row">{{_id}}</th>
+      <td>{{pName}}</td>
+      <td>{{pDesc}}</td>
+      <td>{{pPrice}}</td>
+      <td><form action='/products/edit-product/{{_id}}' method="get">
+      <button class="btn btn-primary" type="submit">EDIT</button></form></td>
+      <td><form action='/products/delete-product/{{_id}}' method="get">
+      <button class="btn btn-primary" type="submit">delete</button></form></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+</div>
+</body>
+</html>

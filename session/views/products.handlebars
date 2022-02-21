@@ -1,0 +1,32 @@
+<p>session is validated <a href='/logout'>Logout</a></p>
+<h1 style="margin-left:550px ;margin-top: 20px; margin-bottom: 20px;">PRODUCTS</h1> 
+
+<table class="table">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">Product Description</th>
+      <th scope="col">Product Price</th>
+      <th scope="col">Edit Product</th>
+      <th scope="col">Delete Product</th>
+    </tr>
+  </thead>
+  <tbody>
+      {{#each products}}
+    <tr>
+      <th scope="row">{{_id}}</th>
+      <td>{{pName}}</td>
+      <td>{{pDesc}}</td>
+      <td>{{price}}</td>
+
+      <td><form action="/products/edit-product/{{_id}}" method="GET">
+      <button type="submit" class="btn btn-primary">Edit</button>
+       </form></td>
+        <td><form action="/products/delete-product/{{_id}}" method="GET">
+      <button type="submit" class="btn btn-primary">Delete</button>
+       </form></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+

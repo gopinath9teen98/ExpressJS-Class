@@ -28,7 +28,7 @@ router.post('/add-product',(req,res)=>{
     let {_id,pName,pDesc,price}=req.body;
     _id=parseInt(_id);
     price=parseInt(price);
-    products.push(
+    products(
         {
             _id,
             pName,
